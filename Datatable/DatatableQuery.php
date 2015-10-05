@@ -351,4 +351,18 @@ class DatatableQuery
 
         return $values;
     }
+    
+    /**
+    * Execute type-specific column behaviour
+    *
+    */
+    public function customColumns($columns)
+    {
+        foreach ($columns as $column) {
+            if ($column->isOverride()) {
+                $column->customQuery($this->qb, $this->em, $this->metadata);
+            }
+        }
+        return $this;
+    }
 }

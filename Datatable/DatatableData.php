@@ -205,6 +205,10 @@ class DatatableData implements DatatableDataInterface
 
         foreach ($this->datatable->getColumns() as $column) {
             // association delimiter found (e.g. 'posts.comments.title')?
+            if ($column->isOverride()){
+                $this->allColumns[] = $column->getProperty();
+                continue;
+            }
             if (strstr($column->getProperty(), '.') !== false) {
                 $array = explode('.', $column->getProperty());
                 $this->setAssociations($array, $this->metadata);
@@ -231,6 +235,8 @@ class DatatableData implements DatatableDataInterface
         //Set columns
         $this->datatableQuery->setSelectFrom($this->selectColumns);
         $this->datatableQuery->setAllColumns($this->allColumns);
+        
+        $this->datatableQuery->customColumns($this->datatable->getColumns());
 
         $this->datatableQuery->setLimit();
         $this->datatableQuery->setOrderBy();
@@ -260,6 +266,11 @@ class DatatableData implements DatatableDataInterface
         );
 
         foreach ($paginator as $item) {
+            if (isset($item[0])) {
+                $itemData = $item[0];
+                unset($item[0]);
+                $item = array_merge($item, $itemData);
+            }
             $output['data'][] = $item;
         }
 

@@ -346,6 +346,14 @@ abstract class AbstractColumn implements ColumnInterface
     {
         return $this->width;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function isOverride()
+    {
+        return false;
+    }
 
     /**
      * {@inheritdoc}

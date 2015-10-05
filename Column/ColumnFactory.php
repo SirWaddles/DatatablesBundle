@@ -57,6 +57,9 @@ class ColumnFactory implements ColumnFactoryInterface
             case 'column':
                 $this->column = new Column($property);
                 break;
+            case 'count':
+                $this->column = new CountColumn($property);
+                break;
             case 'datetime':
                 $this->column = new DateTimeColumn($property);
                 break;
