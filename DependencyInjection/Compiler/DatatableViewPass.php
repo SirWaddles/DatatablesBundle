@@ -35,10 +35,8 @@ class DatatableViewPass implements CompilerPassInterface
 
         foreach ($taggedServices as $id => $tagAttributes) {
             $def = $container->getDefinition($id);
-            $def->addArgument(new Reference('templating'));
-            $def->addArgument(new Reference('translator'));
-            $def->addArgument(new Reference('router'));
-            $def->addArgument('%tommygnr_datatables.default.layout.options%');
+            $def->addMethodCall('setupServices', [new Reference('templating'), new Reference('translator'), new Reference('router')]);
+            $def->addMethodCall('setupConfig', ['%tommygnr_datatables.default.layout.options%']);
         }
     }
 }

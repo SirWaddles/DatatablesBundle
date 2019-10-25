@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use TommyGNR\DatatablesBundle\Datatable\View\DatatableViewInterface;
 
 class TommyGNRDatatablesExtension extends Extension
 {
@@ -28,6 +29,10 @@ class TommyGNRDatatablesExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container
+            ->registerForAutoconfiguration(DatatableViewInterface::class)
+            ->addTag('tommygnr.datatable.view');
 
         $container->setParameter('tommygnr_datatables.default.layout.options', $config['default_layout']);
     }

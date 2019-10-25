@@ -13,8 +13,8 @@ namespace TommyGNR\DatatablesBundle\Datatable\View;
 
 use TommyGNR\DatatablesBundle\Column\ColumnBuilder;
 use TommyGNR\DatatablesBundle\Datatable\Theme\DatatableThemeInterface;
-use Symfony\Bundle\TwigBundle\TwigEngine;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Exception;
 
@@ -28,7 +28,7 @@ abstract class AbstractDatatableView implements DatatableViewInterface
     /**
      * The templating service.
      *
-     * @var TwigEngine
+     * @var EngineInterface
      */
     private $templating;
 
@@ -42,7 +42,7 @@ abstract class AbstractDatatableView implements DatatableViewInterface
     /**
      * The router service.
      *
-     * @var Router
+     * @var UrlGeneratorInterface
      */
     private $router;
 
@@ -144,23 +144,20 @@ abstract class AbstractDatatableView implements DatatableViewInterface
      */
     private $clearExistingState = false;
 
-    /**
-     * Constructor.
-     *
-     * @param TwigEngine          $templating           The templating service
-     * @param TranslatorInterface $translator           The translator service
-     * @param Router              $router               The router service
-     * @param array               $defaultLayoutOptions The default layout options
-     */
-    public function __construct(TwigEngine $templating, TranslatorInterface $translator, Router $router, array $defaultLayoutOptions)
+    public function setupServices(EngineInterface $templating, TranslatorInterface $translator, UrlGeneratorInterface $router)
     {
         $this->templating = $templating;
         $this->translator = $translator;
         $this->router = $router;
+        $this->columnBuilder = new ColumnBuilder();
+    }
+
+    public function setupConfig(array $defaultLayoutOptions)
+    {
         $this->setServerSide($defaultLayoutOptions['server_side']);
         $this->setProcessing($defaultLayoutOptions['processing']);
         $this->setDisplayLength($defaultLayoutOptions['display_length']);
-        $this->columnBuilder = new ColumnBuilder();
+
         $this->ajaxSource = '';
         $this->customizeOptions = array();
     }
