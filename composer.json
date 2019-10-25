@@ -16,15 +16,10 @@
     },
     "require": {
         "php": ">=7.1",
-        "symfony/framework-bundle": "^3.4",
-        "friendsofsymfony/jsrouting-bundle": "@stable"
-    },
-    "suggest": {
-        "mopa/bootstrap-bundle": "v3.0.0-beta3",
-        "moment/moment": "2.5.1"
+        "symfony/framework-bundle": "^4.3",
+        "friendsofsymfony/jsrouting-bundle": "^2.4"
     },
     "autoload": {
-        "psr-0": { "TommyGNR\\DatatablesBundle": "" }
-    },
-    "target-dir": "TommyGNR/DatatablesBundle"
+        "psr-4": { "TommyGNR\\DatatablesBundle\\": "" }
+    }
 }
