@@ -1,8 +1,0 @@
-{% extends 'TommyGNRDatatablesBundle:Column:column.html.twig' %}
-
-{% block data %}
-    "data": "{{ column.data }}",
-    "render": function(data, type, full) {
-        return {{ column.render }}(data, type, full, "{{ column.localizedFormat }}");
-    },
-{% endblock %}

@@ -73,6 +73,6 @@ class JqueryUiDatatableTheme extends AbstractDatatableTheme
      */
     public function getTemplate()
     {
-        return 'TommyGNRDatatablesBundle:Datatable:datatable.html.twig';
+        return '@TommyGNRDatatablesBundle/datatable/datatable.html.twig';
     }
 }
