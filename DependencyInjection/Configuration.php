@@ -26,8 +26,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('tommygnr_datatables');
+        $treeBuilder = new TreeBuilder('tommygnr_datatables');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
