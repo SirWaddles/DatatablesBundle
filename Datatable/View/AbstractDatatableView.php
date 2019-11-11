@@ -13,7 +13,7 @@ namespace TommyGNR\DatatablesBundle\Datatable\View;
 
 use TommyGNR\DatatablesBundle\Column\ColumnBuilder;
 use TommyGNR\DatatablesBundle\Datatable\Theme\DatatableThemeInterface;
-use Symfony\Component\Templating\EngineInterface;
+use Twig\Environment as Templating;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Exception;
@@ -28,7 +28,7 @@ abstract class AbstractDatatableView implements DatatableViewInterface
     /**
      * The templating service.
      *
-     * @var EngineInterface
+     * @var Environment
      */
     private $templating;
 
@@ -144,7 +144,7 @@ abstract class AbstractDatatableView implements DatatableViewInterface
      */
     private $clearExistingState = false;
 
-    public function setupServices(EngineInterface $templating, TranslatorInterface $translator, UrlGeneratorInterface $router)
+    public function setupServices(Templating $templating, TranslatorInterface $translator, UrlGeneratorInterface $router)
     {
         $this->templating = $templating;
         $this->translator = $translator;
