@@ -15,13 +15,6 @@ services:
             - ['@tommygnr_datatables.serializer.datetime', '@tommygnr_datatables.serializer.method']
             - ['@tommygnr_datatables.serializer.encoder.json']
 
-    tommygnr_datatables.datatable.view.factory:
-        class: TommyGNR\DatatablesBundle\Datatable\View\DatatableViewFactory
-        arguments:
-            - '@templating'
-            - '@translator'
-            - '@router'
-            - '%tommygnr_datatables.default.layout.options%'
 
     tommygnr_datatables.twig.extension:
         class: TommyGNR\DatatablesBundle\Twig\DatatableTwigExtension
