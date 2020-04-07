@@ -311,6 +311,8 @@ $(document).ready(function () {
             }
             if (returnValue === 'true') returnValue = true;
             if (returnValue === 'false') returnValue = false;
+
+            return returnValue;
         }
 
         if (action == 'set' && value != 'undefined' && value != null) {
@@ -327,7 +329,14 @@ $(document).ready(function () {
         $(selector).closest('.dataTables_wrapper').find('.dt_cb').replaceWith(clearBtn);
 
         $(selector+'_wrapper').on('click', '.dataTables_clearbtn', function(event) {
-            handleStorageItem('remove', 'table');
+            let tblData = handleStorageItem('get', 'table');
+            if (tblData && tblData.hasOwnProperty('order')) {
+                delete tblData.search;
+                delete tblData.columns;
+                handleStorageItem('set', 'table', tblData);
+            } else {
+                handleStorageItem('remove', 'table');
+            }
             handleStorageItem('remove', 'firstFilteredCol');
             handleStorageItem('remove', 'lastFilteredCol');
 
