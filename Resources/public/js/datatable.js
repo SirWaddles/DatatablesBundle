@@ -243,6 +243,8 @@ $(document).ready(function () {
         //add blank row
         var output = '<option value=""></option>';
         json.columnFilterChoices[target].forEach(function(entry){
+            if (entry === 'true') entry = true;
+            if (entry === 'false') entry = false;
             var selected = '';
             if (searches[0] !== '' && searches[0] == entry) {
                 selected = ' selected="selected"';
@@ -266,7 +268,7 @@ $(document).ready(function () {
             }
 
             output += '<option value="'+entry+'"'+selected+'>' + displayValue +'</option>';
-        })
+        });
 
         return output;
     }

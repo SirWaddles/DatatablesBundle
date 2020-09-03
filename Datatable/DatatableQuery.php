@@ -239,7 +239,7 @@ class DatatableQuery
         $dtColumns = $this->datatable->getColumns();
 
         if ($globalSearchString != '') {
-            $orExpr = $qb->expr()->orX();
+			$searchFields = [];
 
             foreach ($this->requestParams['columns'] as $key => $column) {
                 //TODO This should be read from server side(PHP) config, not client side
@@ -247,13 +247,18 @@ class DatatableQuery
                 if ($dtColumn->isSearchable()) {
                     if ($dtColumn->getProperty() === null) continue;
                     $searchField = $this->allColumns[$key];
-                    $orExpr->add($qb->expr()->like($searchField, "?$i"));
+					$searchFields[] = $searchField;
                 }
             }
             $qb->setParameter($i, "%".$globalSearchString."%");
+    		$search = $i;
             $i++;
 
-            $qb->andWhere($orExpr);
+    		$qb->setParameter($i, " ");
+    		$sep = $i;
+    		$i++;
+
+    		$qb->andWhere("CONCAT_WS(?$sep, " . implode(", ", $searchFields) . ") LIKE ?$search");
         }
 
         // individual filtering
