@@ -229,5 +229,5 @@ interface ColumnInterface
     /**
      * Apply column-specific functionality to query
      */
-    public function customQuerySettings(DatatableQuery $query, DatatableData $data);
+    public function customQuerySettings(DatatableQuery $query, DatatableData $data, int $index);
 }

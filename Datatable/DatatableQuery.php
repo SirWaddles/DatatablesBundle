@@ -200,7 +200,8 @@ class DatatableQuery
     public function setSelectFrom(array $selectColumns)
     {
         foreach ($selectColumns as $tableAlias => $selectColumns) {
-            $this->qb->addSelect('partial '.$tableAlias.'.{'.implode(',', $selectColumns).'} as t_' . $tableAlias);
+            $columns = array_unique($selectColumns);
+            $this->qb->addSelect('partial '.$tableAlias.'.{'.implode(',', $columns).'} as t_' . $tableAlias);
         }
 
         $this->qb->from($this->metadata->getName(), $this->metadata->getTableName());
@@ -247,7 +248,7 @@ class DatatableQuery
                 if ($dtColumn->isSearchable()) {
                     if ($dtColumn->getProperty() === null) continue;
                     $searchField = $this->allColumns[$key];
-					$searchFields[] = $searchField;
+                    $searchFields[] = $searchField;
                 }
             }
             $qb->setParameter($i, "%".$globalSearchString."%");

@@ -75,6 +75,9 @@ class ColumnFactory implements ColumnFactoryInterface
             case 'timebetween':
                 $this->column = new TimeBetweenColumn($property);
                 break;
+            case 'padded':
+                $this->column = new PaddedColumn($property);
+                break;
             default:
                 throw new Exception("The {$name} column is not supported.");
         }

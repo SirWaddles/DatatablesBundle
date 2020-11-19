@@ -494,7 +494,7 @@ abstract class AbstractColumn implements ColumnInterface, \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function customQuerySettings(DatatableQuery $query, DatatableData $data)
+    public function customQuerySettings(DatatableQuery $query, DatatableData $data, int $index)
     {
         return null;
     }

@@ -257,8 +257,8 @@ class DatatableData implements DatatableDataInterface
         $this->datatableQuery->setSelectFrom($this->selectColumns);
         $this->datatableQuery->setAllColumns($this->allColumns);
 
-        foreach ($this->datatable->getColumns() as $column) {
-            $column->customQuerySettings($this->datatableQuery, $this);
+        foreach ($this->datatable->getColumns() as $idx => $column) {
+            $column->customQuerySettings($this->datatableQuery, $this, $idx);
         }
 
         $this->datatableQuery->setLimit();

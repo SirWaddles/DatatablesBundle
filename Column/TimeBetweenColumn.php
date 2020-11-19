@@ -108,7 +108,7 @@ class TimeBetweenColumn extends BaseColumn
     /**
      * {@inheritdoc}
      */
-    public function customQuerySettings(DatatableQuery $query, DatatableData $data)
+    public function customQuerySettings(DatatableQuery $query, DatatableData $data, int $index)
     {
         $qb = $query->getQb();
         $fieldName = str_replace(".", "_", $this->getProperty());

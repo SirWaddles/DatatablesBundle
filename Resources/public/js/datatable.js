@@ -181,6 +181,9 @@ $(document).ready(function () {
             };
             return;
         }
+        if (v.className == 'padded') {
+            v.render = (data, type, full) => render_padded(data, type, full, v.prefix, v.width);
+        }
         if (v.render && window.DatatableRenderObjects.hasOwnProperty(v.render) && typeof v.render == 'string') {
             let fnIndex = v.render;
             v.render = (data, type, full) => window.DatatableRenderObjects[fnIndex](data, type, full, v.extra_data);
@@ -407,6 +410,12 @@ function render_timeago(data, type, full) {
     } else {
         return null;
     }
+}
+
+function render_padded(data, type, full, prefix, width) {
+    var n = data.toString();
+    var width = width;
+    return prefix + (n.length >= width ? n : new Array(width - n.length + 1).join("0") + n);
 }
 
 function render_multiselect(data, type, full) {
