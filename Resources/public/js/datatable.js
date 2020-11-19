@@ -415,7 +415,7 @@ function render_timeago(data, type, full) {
 function render_padded(data, type, full, prefix, width) {
     var n = data.toString();
     var width = width;
-    return prefix + (n.length >= width ? n : new Array(width - n.length + 1).join("0") + n);
+    return prefix + '-' + (n.length >= width ? n : new Array(width - n.length + 1).join("0") + n);
 }
 
 function render_multiselect(data, type, full) {
