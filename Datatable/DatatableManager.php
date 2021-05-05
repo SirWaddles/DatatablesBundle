@@ -11,7 +11,7 @@
 
 namespace TommyGNR\DatatablesBundle\Datatable;
 
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Serializer;
 use TommyGNR\DatatablesBundle\Datatable\View\AbstractDatatableView;
@@ -24,7 +24,7 @@ class DatatableManager
     /**
      * The doctrine service.
      *
-     * @var RegistryInterface
+     * @var Registry
      */
     private $doctrine;
 
@@ -43,11 +43,11 @@ class DatatableManager
     private $serializer;
 
     /**
-     * @param RegistryInterface $doctrine   The doctrine service
+     * @param Registry $doctrine   The doctrine service
      * @param Request           $request    The request service
      * @param Serializer        $serializer The serializer service
      */
-    public function __construct(RegistryInterface $doctrine, RequestStack $requestStack, Serializer $serializer)
+    public function __construct(Registry $doctrine, RequestStack $requestStack, Serializer $serializer)
     {
         $this->doctrine = $doctrine;
         $this->request = $requestStack->getCurrentRequest();
@@ -81,7 +81,7 @@ class DatatableManager
         return new DatatableData(
             $params,
             $datatable,
-            $this->doctrine,
+            $this->doctrine->getManager(),
             $this->serializer
         );
     }

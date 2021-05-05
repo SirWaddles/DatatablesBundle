@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use TommyGNR\DatatablesBundle\Datatable\View\AbstractDatatableView;
@@ -87,12 +87,12 @@ class DatatableData implements DatatableDataInterface
      * @param Serializer     $serializer     A Serializer instance
      * @param DatatableQuery $datatableQuery A DatatableQuery instance
      */
-    public function __construct(array $requestParams, AbstractDatatableView $datatable, RegistryInterface $doctrine, Serializer $serializer)
+    public function __construct(array $requestParams, AbstractDatatableView $datatable, EntityManagerInterface $doctrine, Serializer $serializer)
     {
         $this->requestParams = $requestParams;
         $this->datatable = $datatable;
-        $this->metadata = $doctrine->getManager()->getClassMetadata($datatable->getEntity());
-        $this->em = $doctrine->getManager();
+        $this->metadata = $doctrine->getClassMetadata($datatable->getEntity());
+        $this->em = $doctrine;
         $this->serializer = $serializer;
 
         $this->datatableQuery = new DatatableQuery($requestParams, $this->metadata, $this->em, $datatable);
