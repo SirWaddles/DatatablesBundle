@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=7.1",
-        "symfony/framework-bundle": "^4.3",
+        "symfony/framework-bundle": "^5.4",
         "friendsofsymfony/jsrouting-bundle": "^2.4"
     },
     "autoload": {
