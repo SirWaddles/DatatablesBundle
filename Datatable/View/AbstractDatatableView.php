@@ -15,7 +15,7 @@ use TommyGNR\DatatablesBundle\Column\ColumnBuilder;
 use TommyGNR\DatatablesBundle\Datatable\Theme\DatatableThemeInterface;
 use Twig\Environment as Templating;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Exception;
 
 /**
