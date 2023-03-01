@@ -77,7 +77,7 @@ abstract class AbstractDatatableTheme implements DatatableThemeInterface
     /**
      * Clone.
      */
-    final private function __clone()
+    private function __clone()
     {
     }
 
