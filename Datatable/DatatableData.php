@@ -298,6 +298,12 @@ class DatatableData implements DatatableDataInterface
             }
         }
 
+        array_walk_recursive($output, function (&$value, $key) {
+            if (is_string($value)) {
+                $value = htmlentities($value);
+            }
+        });
+
         $json = $this->serializer->serialize($output, 'json');
         $response = new Response($json);
         $response->headers->set('Content-Type', 'application/json');
