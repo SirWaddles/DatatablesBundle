@@ -272,6 +272,33 @@ class DatatableData implements DatatableDataInterface
         return $this;
     }
 
+    private function processResults($paginator, $fieldName)
+    {
+        // In some strange circumstances, Doctrine will return duplicate results
+        // when using the array hydration.
+        // It seems like it would be very difficult to fix upstream
+
+        $data = [];
+
+        foreach ($paginator as $item) {
+            if (isset($item[$fieldName])) {
+                $data[] = $item[$fieldName];
+            } else {
+                $data[] = $item;
+            }
+        }
+
+        if (empty($data)) return $data;
+        if (!isset($data[0]['id'])) return $data;
+
+        $unique = [];
+        foreach ($data as $item) {
+            $unique[$item['id']] = $item;
+        }
+
+        return array_values($unique);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -290,13 +317,7 @@ class DatatableData implements DatatableDataInterface
 
         $fieldName = 't_' . $this->metadata->getTableName();
 
-        foreach ($paginator as $item) {
-            if (isset($item[$fieldName])) {
-                $output['data'][] = $item[$fieldName];
-            } else {
-                $output['data'][] = $item;
-            }
-        }
+        $output['data'] = $this->processResults($paginator, $fieldName);
 
         array_walk_recursive($output, function (&$value, $key) {
             if (is_string($value)) {
