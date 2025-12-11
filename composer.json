@@ -15,9 +15,9 @@
         "issues": "https://github.com/tommygnr/DatatablesBundle/issues"
     },
     "require": {
-        "php": ">=7.1",
-        "symfony/framework-bundle": "^5.4",
-        "friendsofsymfony/jsrouting-bundle": "^2.4"
+        "php": ">=8.1",
+        "symfony/framework-bundle": "^7.4",
+        "friendsofsymfony/jsrouting-bundle": "^3.6"
     },
     "autoload": {
         "psr-4": { "TommyGNR\\DatatablesBundle\\": "" }
