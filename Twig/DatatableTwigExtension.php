@@ -12,15 +12,15 @@
 namespace TommyGNR\DatatablesBundle\Twig;
 
 use TommyGNR\DatatablesBundle\Datatable\View\AbstractDatatableView;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Class DatatableTwigExtension
  *
  * @package TommyGNR\DatatablesBundle\Twig
  */
-class DatatableTwigExtension extends Twig_Extension
+class DatatableTwigExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class DatatableTwigExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_SimpleFunction('datatable_render', array($this, 'datatableRender'), array('is_safe' => array('all'))),
+            new TwigFunction('datatable_render', array($this, 'datatableRender'), array('is_safe' => array('all'))),
         );
     }
 

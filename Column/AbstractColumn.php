@@ -137,7 +137,7 @@ abstract class AbstractColumn implements ColumnInterface, \JsonSerializable
         $this->property = $property;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'data' => $this->getData(),

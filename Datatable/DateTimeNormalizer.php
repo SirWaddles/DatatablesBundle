@@ -19,14 +19,21 @@ use \DateTime;
  */
 class DateTimeNormalizer implements NormalizerInterface
 {
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, $format = null, array $context = []): int|null
     {
         return $object->getTimestamp();
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         if ($data instanceof DateTime) return true;
         return false;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            Datetime::class => true,
+        ];
     }
 }

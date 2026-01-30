@@ -42,7 +42,7 @@ class PaddedColumn extends BaseColumn
         parent::__construct($property);
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         $data = parent::jsonSerialize();
         $data['prefix'] = $this->getPrefix();

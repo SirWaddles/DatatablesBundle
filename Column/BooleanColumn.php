@@ -64,7 +64,7 @@ class BooleanColumn extends BaseColumn
         parent::__construct($property);
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return array_merge(parent::jsonSerialize(), [
             'true_icon' => $this->getTrueIcon(),
